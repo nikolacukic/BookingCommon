@@ -6,6 +6,7 @@
 package domain;
 
 import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,10 +17,11 @@ public class Klijent extends Korisnik implements GeneralEntity {
 
     private int brojOdsedanja;
     private double stanjeNaRacunu;
+    private List<Rezervacija> rezervacije;
 
     public Klijent() {
     }
-    
+
     public Klijent(int brojOdsedanja, double stanjeNaRacunu, String korisnickoIme, String lozinka, String imePrezime, String jmbg, String ePosta) {
         super(korisnickoIme, lozinka, imePrezime, jmbg, ePosta);
         this.brojOdsedanja = brojOdsedanja;
@@ -41,9 +43,15 @@ public class Klijent extends Korisnik implements GeneralEntity {
     public void setStanjeNaRacunu(double stanjeNaRacunu) {
         this.stanjeNaRacunu = stanjeNaRacunu;
     }
-    
-    
-    
+
+    public List<Rezervacija> getRezervacije() {
+        return rezervacije;
+    }
+
+    public void setRezervacije(List<Rezervacija> rezervacije) {
+        this.rezervacije = rezervacije;
+    }
+
     @Override
     public String getTableName() {
         return "klijent";
@@ -51,7 +59,35 @@ public class Klijent extends Korisnik implements GeneralEntity {
 
     @Override
     public List<GeneralEntity> getList(ResultSet resultSet) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<GeneralEntity> list = new LinkedList<>();
+        while (resultSet.next()) {
+            String username = resultSet.getString("korisnicko_ime");
+            String password = resultSet.getString("lozinka");
+            String ime = resultSet.getString("ime_prezime");
+            String maticni = resultSet.getString("jmbg");
+            String email = resultSet.getString("ePosta");
+            int brOds = resultSet.getInt("brojOdsedanja");
+            double stanje = resultSet.getDouble("stanje_na_racunu");
+
+            Klijent k = new Klijent(brOds, stanje, username, password, ime, maticni, email);
+            list.add(k);
+        }
+        return list;
+    }
+
+    @Override
+    public GeneralEntity getOne(ResultSet resultSet) throws Exception {
+        while (resultSet.next()) {
+            String username = resultSet.getString("korisnicko_ime");
+            String password = resultSet.getString("lozinka");
+            String ime = resultSet.getString("ime_prezime");
+            String maticni = resultSet.getString("jmbg");
+            String email = resultSet.getString("ePosta");
+            int brOds = resultSet.getInt("brojOdsedanja");
+            double stanje = resultSet.getDouble("stanje_na_racunu");
+            return new Klijent(brOds, stanje, username, password, ime, maticni, email);
+        }
+        throw new Exception("Klijent sa unetim korisnickim imenom i lozinkom ne postoji. Proverite podatke!");
     }
 
 }

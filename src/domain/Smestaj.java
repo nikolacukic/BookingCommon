@@ -6,6 +6,7 @@
 package domain;
 
 import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -14,12 +15,14 @@ import java.util.List;
  */
 public class Smestaj implements GeneralEntity {
 
+    private VlasnikSmestaja vlasnik;
     private String sifraSmestaja;
     private String nazivSmestaja;
     private int brojKreveta;
     private double cenaPrenocista;
     private String opis;
     private double prosecnaOcena;
+    private List<Rezervacija> rezervacije;
 
     public Smestaj() {
     }
@@ -80,17 +83,49 @@ public class Smestaj implements GeneralEntity {
     public void setProsecnaOcena(double prosecnaOcena) {
         this.prosecnaOcena = prosecnaOcena;
     }
-    
-    
-    
+
+    public List<Rezervacija> getRezervacije() {
+        return rezervacije;
+    }
+
+    public void setRezervacije(List<Rezervacija> rezervacije) {
+        this.rezervacije = rezervacije;
+    }
+
+    public VlasnikSmestaja getVlasnik() {
+        return vlasnik;
+    }
+
+    public void setVlasnik(VlasnikSmestaja vlasnik) {
+        this.vlasnik = vlasnik;
+    }
+
     @Override
     public String getTableName() {
         return "smestaj";
     }
+//TODO MORA DA SE IMLPEMENTIRA I UCITAVANJE VLASNIKA SMESTAJA NEKAKO
 
     @Override
     public List<GeneralEntity> getList(ResultSet resultSet) throws Exception {
+        List<GeneralEntity> list = new LinkedList<>();
+        while (resultSet.next()) {
+            String id = resultSet.getString("sifra_smestaja");
+            String naziv = resultSet.getString("naziv_smestaja");
+            double cena = resultSet.getDouble("cena_prenocista");
+            int kreveti = resultSet.getInt("broj_kreveta");
+            double ocena = resultSet.getDouble("prosecna_ocena");
+            String desc = resultSet.getString("opis");
+
+            Smestaj s = new Smestaj(id, naziv, kreveti, cena, desc, ocena);
+            list.add(s);
+        }
+        return list;
+    }
+
+    @Override
+    public GeneralEntity getOne(ResultSet resultSet) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
