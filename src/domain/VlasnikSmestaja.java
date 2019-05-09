@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author user
  */
-public class VlasnikSmestaja extends Korisnik implements GeneralEntity {
+public class VlasnikSmestaja extends Korisnik {
 
     private String brojLicneKarte;
     private String kontaktTelefon;
@@ -74,11 +74,11 @@ public class VlasnikSmestaja extends Korisnik implements GeneralEntity {
             String username = resultSet.getString("korisnicko_ime");
             String password = resultSet.getString("lozinka");
             String ime = resultSet.getString("ime_prezime");
-            String maticni = resultSet.getString("JMBG");
-            String email = resultSet.getString("ePosta");
+            String maticni = resultSet.getString("jmbg");
+            String email = resultSet.getString("e_posta");
             String brLk = resultSet.getString("broj_lk");
             double ocena = resultSet.getDouble("ocena_usluge");
-            String telefon = resultSet.getString("kontaktTelefon");
+            String telefon = resultSet.getString("kontakt_telefon");
 
             VlasnikSmestaja v = new VlasnikSmestaja(brLk, telefon, ocena, username, password, ime, maticni, email);
             list.add(v);
@@ -92,11 +92,11 @@ public class VlasnikSmestaja extends Korisnik implements GeneralEntity {
             String username = resultSet.getString("korisnicko_ime");
             String password = resultSet.getString("lozinka");
             String ime = resultSet.getString("ime_prezime");
-            String maticni = resultSet.getString("JMBG");
-            String email = resultSet.getString("ePosta");
+            String maticni = resultSet.getString("jmbg");
+            String email = resultSet.getString("e_posta");
             String brLk = resultSet.getString("broj_lk");
             double ocena = resultSet.getDouble("ocena_usluge");
-            String telefon = resultSet.getString("kontaktTelefon");
+            String telefon = resultSet.getString("kontakt_telefon");
             return new VlasnikSmestaja(brLk, telefon, ocena, username, password, ime, maticni, email);
         }
         throw new Exception("Vlasnik smestaja sa unetim korisnickim imenom i lozinkom ne postoji! Proverite podatke!");

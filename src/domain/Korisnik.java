@@ -9,7 +9,7 @@ package domain;
  *
  * @author user
  */
-public abstract class Korisnik {
+public abstract class Korisnik implements GeneralEntity{
     
     protected String korisnickoIme;
     protected String lozinka;

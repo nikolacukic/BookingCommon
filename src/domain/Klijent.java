@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author user
  */
-public class Klijent extends Korisnik implements GeneralEntity {
+public class Klijent extends Korisnik{
 
     private int brojOdsedanja;
     private double stanjeNaRacunu;
@@ -65,8 +65,8 @@ public class Klijent extends Korisnik implements GeneralEntity {
             String password = resultSet.getString("lozinka");
             String ime = resultSet.getString("ime_prezime");
             String maticni = resultSet.getString("jmbg");
-            String email = resultSet.getString("ePosta");
-            int brOds = resultSet.getInt("brojOdsedanja");
+            String email = resultSet.getString("e_posta");
+            int brOds = resultSet.getInt("broj_odsedanja");
             double stanje = resultSet.getDouble("stanje_na_racunu");
 
             Klijent k = new Klijent(brOds, stanje, username, password, ime, maticni, email);
@@ -82,8 +82,8 @@ public class Klijent extends Korisnik implements GeneralEntity {
             String password = resultSet.getString("lozinka");
             String ime = resultSet.getString("ime_prezime");
             String maticni = resultSet.getString("jmbg");
-            String email = resultSet.getString("ePosta");
-            int brOds = resultSet.getInt("brojOdsedanja");
+            String email = resultSet.getString("e_posta");
+            int brOds = resultSet.getInt("broj_odsedanja");
             double stanje = resultSet.getDouble("stanje_na_racunu");
             return new Klijent(brOds, stanje, username, password, ime, maticni, email);
         }
