@@ -19,4 +19,6 @@ public interface GeneralEntity extends Serializable {
 
     public List<GeneralEntity> getList(ResultSet resultSet) throws Exception;
     public GeneralEntity getOne(ResultSet resultSet) throws Exception;
+    public String getColumns();
+    public String getValues();
 }

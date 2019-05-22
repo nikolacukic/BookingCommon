@@ -102,4 +102,14 @@ public class VlasnikSmestaja extends Korisnik {
         throw new Exception("Vlasnik smestaja sa unetim korisnickim imenom i lozinkom ne postoji! Proverite podatke!");
     }
 
+    @Override
+    public String getColumns() {
+        return "(korisnicko_ime, lozinka, ime_prezime, jmbg, e_posta, broj_lk, ocena_usluge, kontakt_telefon)";
+    }
+
+    @Override
+    public String getValues() {
+        return "(?, ?, ?, ?, ?, ?, ?, ?)";
+    }
+
 }

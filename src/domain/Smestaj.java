@@ -16,7 +16,7 @@ import java.util.List;
 public class Smestaj implements GeneralEntity {
 
     private VlasnikSmestaja vlasnik;
-    private String sifraSmestaja;
+    private long sifraSmestaja;
     private String nazivSmestaja;
     private int brojKreveta;
     private double cenaPrenocista;
@@ -27,7 +27,7 @@ public class Smestaj implements GeneralEntity {
     public Smestaj() {
     }
 
-    public Smestaj(String sifraSmestaja, String nazivSmestaja, int brojKreveta, double cenaPrenocista, String opis, double prosecnaOcena) {
+    public Smestaj(long sifraSmestaja, String nazivSmestaja, int brojKreveta, double cenaPrenocista, String opis, double prosecnaOcena) {
         this.sifraSmestaja = sifraSmestaja;
         this.nazivSmestaja = nazivSmestaja;
         this.brojKreveta = brojKreveta;
@@ -36,11 +36,11 @@ public class Smestaj implements GeneralEntity {
         this.prosecnaOcena = prosecnaOcena;
     }
 
-    public String getSifraSmestaja() {
+    public long getSifraSmestaja() {
         return sifraSmestaja;
     }
 
-    public void setSifraSmestaja(String sifraSmestaja) {
+    public void setSifraSmestaja(long sifraSmestaja) {
         this.sifraSmestaja = sifraSmestaja;
     }
 
@@ -110,13 +110,13 @@ public class Smestaj implements GeneralEntity {
     public List<GeneralEntity> getList(ResultSet resultSet) throws Exception {
         List<GeneralEntity> list = new LinkedList<>();
         while (resultSet.next()) {
-            String id = resultSet.getString("sifra_smestaja");
+            long id = resultSet.getLong("sifra_smestaja");
             String naziv = resultSet.getString("naziv_smestaja");
             double cena = resultSet.getDouble("cena_prenocista");
             int kreveti = resultSet.getInt("broj_kreveta");
             double ocena = resultSet.getDouble("prosecna_ocena");
             String desc = resultSet.getString("opis");
-
+            
             Smestaj s = new Smestaj(id, naziv, kreveti, cena, desc, ocena);
             list.add(s);
         }
@@ -126,6 +126,16 @@ public class Smestaj implements GeneralEntity {
     @Override
     public GeneralEntity getOne(ResultSet resultSet) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getColumns() {
+        return "(naziv_smestaja, cena_prenocista, broj_kreveta, prosecna_ocena, opis, vlasnik_id)";
+    }
+
+    @Override
+    public String getValues() {
+        return "(?, ?, ?, ?, ?, ?)";
     }
 
 }

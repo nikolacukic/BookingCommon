@@ -85,5 +85,15 @@ public class Rezervacija implements GeneralEntity {
     public GeneralEntity getOne(ResultSet resultSet) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String getColumns() {
+        return "(sifra_smestaja, klijent_id, datum_od, datum_do, ukupan_iznos)";
+    }
+
+    @Override
+    public String getValues() {
+        return "(?, ?, ?, ?, ?)";
+    }
     
 }

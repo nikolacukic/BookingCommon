@@ -90,4 +90,14 @@ public class Klijent extends Korisnik{
         throw new Exception("Klijent sa unetim korisnickim imenom i lozinkom ne postoji. Proverite podatke!");
     }
 
+    @Override
+    public String getColumns() {
+        return "(korisnicko_ime, lozinka, ime_prezime, jmbg, e_posta, broj_odsedanja, stanje_na_racunu)";
+    }
+
+    @Override
+    public String getValues() {
+        return "(?, ?, ?, ?, ?, ?, ?)";
+    }
+
 }

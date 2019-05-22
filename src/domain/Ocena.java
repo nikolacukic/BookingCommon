@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class Ocena implements GeneralEntity {
 
+    private Klijent klijent;
+    private Smestaj smestaj;
     private int ocena;
     private String opis;
 
@@ -40,6 +42,22 @@ public class Ocena implements GeneralEntity {
     public void setOpis(String opis) {
         this.opis = opis;
     }
+
+    public Klijent getKlijent() {
+        return klijent;
+    }
+
+    public void setKlijent(Klijent klijent) {
+        this.klijent = klijent;
+    }
+
+    public Smestaj getSmestaj() {
+        return smestaj;
+    }
+
+    public void setSmestaj(Smestaj smestaj) {
+        this.smestaj = smestaj;
+    }
     
     
     
@@ -56,6 +74,16 @@ public class Ocena implements GeneralEntity {
     @Override
     public GeneralEntity getOne(ResultSet resultSet) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getColumns() {
+        return "(smestaj_id, klijent_id, konacna_ocena, opis)";
+    }
+
+    @Override
+    public String getValues() {
+        return "(?, ?, ?, ?)";
     }
     
 }
