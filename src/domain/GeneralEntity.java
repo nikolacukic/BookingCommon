@@ -21,4 +21,6 @@ public interface GeneralEntity extends Serializable {
     public GeneralEntity getOne(ResultSet resultSet) throws Exception;
     public String getColumns();
     public String getValues();
+    public String getIdName();
+    public String getId();
 }

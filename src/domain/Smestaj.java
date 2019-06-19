@@ -138,4 +138,14 @@ public class Smestaj implements GeneralEntity {
         return "(?, ?, ?, ?, ?, ?)";
     }
 
+    @Override
+    public String getIdName() {
+        return "sifra_smestaja";
+    }
+
+    @Override
+    public String getId() {
+        return ""+getSifraSmestaja();
+    }
+
 }

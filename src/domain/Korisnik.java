@@ -67,6 +67,17 @@ public abstract class Korisnik implements GeneralEntity{
     public void setePosta(String ePosta) {
         this.ePosta = ePosta;
     }
+
+    @Override
+    public String getIdName() {
+        return "korisnicko_ime";
+    }
+
+    @Override
+    public String getId() {
+        return getKorisnickoIme();
+    }
+    
     
     
 }

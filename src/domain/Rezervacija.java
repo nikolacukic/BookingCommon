@@ -7,7 +7,6 @@ package domain;
 
 import java.sql.ResultSet;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -94,6 +93,16 @@ public class Rezervacija implements GeneralEntity {
     @Override
     public String getValues() {
         return "(?, ?, ?, ?, ?)";
+    }
+
+    @Override
+    public String getIdName() {
+        return "slozens";
+    }
+
+    @Override
+    public String getId() {
+        return "slozen";
     }
     
 }

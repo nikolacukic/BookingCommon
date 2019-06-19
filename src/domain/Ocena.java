@@ -85,5 +85,15 @@ public class Ocena implements GeneralEntity {
     public String getValues() {
         return "(?, ?, ?, ?)";
     }
+
+    @Override
+    public String getIdName() {
+        return "slozen";
+    }
+
+    @Override
+    public String getId() {
+        throw new UnsupportedOperationException("Ocena ima slozen kljuc");
+    }
     
 }
