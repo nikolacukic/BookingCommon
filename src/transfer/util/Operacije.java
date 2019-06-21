@@ -21,6 +21,7 @@ public interface Operacije {
     public static final int REZERVACIJA_BRISANJE = 8;
     public static final int REZERVACIJA_UCITAVANJE = 9;
     public static final int OCENA_KREIRANJE = 10;
+    public static final int GASENJE = 11;
    
     
 }
