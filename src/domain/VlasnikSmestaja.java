@@ -17,17 +17,15 @@ public class VlasnikSmestaja extends Korisnik {
 
     private String brojLicneKarte;
     private String kontaktTelefon;
-    private double ocenaUsluge;
     private List<Smestaj> smestaji;
 
     public VlasnikSmestaja() {
     }
 
-    public VlasnikSmestaja(String brojLicneKarte, String kontaktTelefon, double ocenaUsluge, String korisnickoIme, String lozinka, String imePrezime, String jmbg, String ePosta) {
+    public VlasnikSmestaja(String brojLicneKarte, String kontaktTelefon, String korisnickoIme, String lozinka, String imePrezime, String jmbg, String ePosta) {
         super(korisnickoIme, lozinka, imePrezime, jmbg, ePosta);
         this.brojLicneKarte = brojLicneKarte;
         this.kontaktTelefon = kontaktTelefon;
-        this.ocenaUsluge = ocenaUsluge;
     }
 
     public String getBrojLicneKarte() {
@@ -44,14 +42,6 @@ public class VlasnikSmestaja extends Korisnik {
 
     public void setKontaktTelefon(String kontaktTelefon) {
         this.kontaktTelefon = kontaktTelefon;
-    }
-
-    public double getOcenaUsluge() {
-        return ocenaUsluge;
-    }
-
-    public void setOcenaUsluge(double ocenaUsluge) {
-        this.ocenaUsluge = ocenaUsluge;
     }
 
     public List<Smestaj> getSmestaji() {
@@ -77,10 +67,9 @@ public class VlasnikSmestaja extends Korisnik {
             String maticni = resultSet.getString("jmbg");
             String email = resultSet.getString("e_posta");
             String brLk = resultSet.getString("broj_lk");
-            double ocena = resultSet.getDouble("ocena_usluge");
             String telefon = resultSet.getString("kontakt_telefon");
 
-            VlasnikSmestaja v = new VlasnikSmestaja(brLk, telefon, ocena, username, password, ime, maticni, email);
+            VlasnikSmestaja v = new VlasnikSmestaja(brLk, telefon, username, password, ime, maticni, email);
             list.add(v);
         }
         return list;
@@ -95,21 +84,20 @@ public class VlasnikSmestaja extends Korisnik {
             String maticni = resultSet.getString("jmbg");
             String email = resultSet.getString("e_posta");
             String brLk = resultSet.getString("broj_lk");
-            double ocena = resultSet.getDouble("ocena_usluge");
             String telefon = resultSet.getString("kontakt_telefon");
-            return new VlasnikSmestaja(brLk, telefon, ocena, username, password, ime, maticni, email);
+            return new VlasnikSmestaja(brLk, telefon, username, password, ime, maticni, email);
         }
         throw new Exception("Vlasnik smestaja sa unetim korisnickim imenom i lozinkom ne postoji! Proverite podatke!");
     }
 
     @Override
     public String getColumns() {
-        return "(korisnicko_ime, lozinka, ime_prezime, jmbg, e_posta, broj_lk, ocena_usluge, kontakt_telefon)";
+        return "(korisnicko_ime, lozinka, ime_prezime, jmbg, e_posta, broj_lk, kontakt_telefon)";
     }
 
     @Override
     public String getValues() {
-        return "(?, ?, ?, ?, ?, ?, ?, ?)";
+        return "(?, ?, ?, ?, ?, ?, ?)";
     }
 
 }
