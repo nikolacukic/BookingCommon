@@ -27,6 +27,15 @@ public class Ocena implements GeneralEntity {
         this.opis = opis;
     }
 
+    public Ocena(Klijent klijent, Smestaj smestaj, int ocena, String opis) {
+        this.klijent = klijent;
+        this.smestaj = smestaj;
+        this.ocena = ocena;
+        this.opis = opis;
+    }
+
+    
+    
     public int getOcena() {
         return ocena;
     }

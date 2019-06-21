@@ -22,7 +22,8 @@ public class Smestaj implements GeneralEntity {
     private double cenaPrenocista;
     private String opis;
     private double prosecnaOcena;
-    private List<Rezervacija> rezervacije;
+    private List<Rezervacija> rezervacije = new LinkedList<Rezervacija>();
+    private List<Ocena> ocene = new LinkedList<Ocena>();
 
     public Smestaj() {
     }
@@ -100,6 +101,14 @@ public class Smestaj implements GeneralEntity {
         this.vlasnik = vlasnik;
     }
 
+    public List<Ocena> getOcene() {
+        return ocene;
+    }
+
+    public void setOcene(List<Ocena> ocene) {
+        this.ocene = ocene;
+    }
+    
     @Override
     public String getTableName() {
         return "smestaj";
@@ -125,7 +134,21 @@ public class Smestaj implements GeneralEntity {
 
     @Override
     public GeneralEntity getOne(ResultSet resultSet) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        while (resultSet.next()) {
+            long sifra = resultSet.getLong("sifra_smestaja");
+            String naziv = resultSet.getString("naziv_smestaja");
+            double cena = resultSet.getDouble("cena_prenocista");
+            int brojKr = resultSet.getInt("broj_kreveta");
+            double prosek = resultSet.getDouble("prosecna_ocena");
+            String opis = resultSet.getString("opis");
+            String username = resultSet.getString("vlasnik_id");
+            VlasnikSmestaja v = new VlasnikSmestaja();
+            v.setKorisnickoIme(username);
+            Smestaj s = new Smestaj(sifra, naziv, brojKr, cena, opis, prosek);
+            s.setVlasnik(v);
+            return s;
+        }
+        throw new Exception();
     }
 
     @Override
@@ -148,4 +171,32 @@ public class Smestaj implements GeneralEntity {
         return ""+getSifraSmestaja();
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Smestaj other = (Smestaj) obj;
+        if (this.sifraSmestaja != other.sifraSmestaja) {
+            return false;
+        }
+        return true;
+    }
+
+    public void azurirajProsek() {
+        int suma = 0;
+        for(Ocena o: ocene){
+            suma+=o.getOcena();
+        }
+        setProsecnaOcena((double)suma/ocene.size());
+    }
+
+    
 }

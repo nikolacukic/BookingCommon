@@ -7,6 +7,7 @@ package domain;
 
 import java.sql.ResultSet;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,7 +25,9 @@ public class Rezervacija implements GeneralEntity {
     public Rezervacija() {
     }
 
-    public Rezervacija(String smestajId, String klijentId, Date datumOd, Date datumDo, double ukupanIznos) {
+    public Rezervacija(Smestaj smestaj, Klijent klijent, Date datumOd, Date datumDo, double ukupanIznos) {
+        this.smestaj = smestaj;
+        this.klijent = klijent;
         this.datumOd = datumOd;
         this.datumDo = datumDo;
         this.ukupanIznos = ukupanIznos;
@@ -77,7 +80,19 @@ public class Rezervacija implements GeneralEntity {
 
     @Override
     public List<GeneralEntity> getList(ResultSet resultSet) throws Exception {
-        return null;
+        List<GeneralEntity> list = new LinkedList<>();
+        while (resultSet.next()) {
+            String sifra_smestaja = resultSet.getString("korisnicko_ime");
+            
+            String klijent_id = resultSet.getString("lozinka");
+            String datum_Od = resultSet.getString("ime_prezime");
+            String datum_Do = resultSet.getString("jmbg");
+            String ukupan_Iznos = resultSet.getString("e_posta");
+
+            Rezervacija r = new Rezervacija(smestaj, klijent, datumOd, datumDo, ukupanIznos);
+            list.add(r);
+        }
+        return list;
     }
 
     @Override
@@ -97,7 +112,7 @@ public class Rezervacija implements GeneralEntity {
 
     @Override
     public String getIdName() {
-        return "slozens";
+        return "slozen";
     }
 
     @Override

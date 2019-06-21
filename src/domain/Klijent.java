@@ -17,7 +17,8 @@ public class Klijent extends Korisnik{
 
     private int brojOdsedanja;
     private double stanjeNaRacunu;
-    private List<Rezervacija> rezervacije;
+    private List<Rezervacija> rezervacije = new LinkedList<Rezervacija>();
+    private List<Ocena> ocene = new LinkedList<Ocena>();
 
     public Klijent() {
     }
@@ -52,6 +53,16 @@ public class Klijent extends Korisnik{
         this.rezervacije = rezervacije;
     }
 
+    public List<Ocena> getOcene() {
+        return ocene;
+    }
+
+    public void setOcene(List<Ocena> ocene) {
+        this.ocene = ocene;
+    }
+
+    
+    
     @Override
     public String getTableName() {
         return "klijent";
